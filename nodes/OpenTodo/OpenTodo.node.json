@@ -6,12 +6,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://github.com/pixari/n8n-nodes-opentodo#credentials"
+				"url": "https://github.com/OpenTodoApp/n8n-nodes-opentodo#credentials"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://github.com/pixari/n8n-nodes-opentodo#readme"
+				"url": "https://github.com/OpenTodoApp/n8n-nodes-opentodo#readme"
 			}
 		]
 	}

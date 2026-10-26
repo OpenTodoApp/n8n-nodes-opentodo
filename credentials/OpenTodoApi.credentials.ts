@@ -13,7 +13,7 @@ export class OpenTodoApi implements ICredentialType {
 
 	icon: Icon = { light: 'file:opentodo.svg', dark: 'file:opentodo.dark.svg' };
 
-	documentationUrl = 'https://github.com/pixari/n8n-nodes-opentodo#credentials';
+	documentationUrl = 'https://github.com/OpenTodoApp/n8n-nodes-opentodo#credentials';
 
 	properties: INodeProperties[] = [
 		{

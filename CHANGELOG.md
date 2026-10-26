@@ -21,5 +21,5 @@ First release.
 - Unit tests, and end-to-end tests against a real OpenTodo server and a real n8n with the package installed, in CI.
 - Publishing from GitHub Actions with npm provenance on a version tag.
 
-[Unreleased]: https://github.com/pixari/n8n-nodes-opentodo/compare/0.1.0...HEAD
-[0.1.0]: https://github.com/pixari/n8n-nodes-opentodo/releases/tag/0.1.0
+[Unreleased]: https://github.com/OpenTodoApp/n8n-nodes-opentodo/compare/0.1.0...HEAD
+[0.1.0]: https://github.com/OpenTodoApp/n8n-nodes-opentodo/releases/tag/0.1.0

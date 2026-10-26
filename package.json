@@ -3,9 +3,9 @@
 	"version": "0.1.0",
 	"description": "n8n nodes for OpenTodo, the self-hosted task manager: tasks, projects, labels, comments and a signed webhook trigger.",
 	"license": "MIT",
-	"homepage": "https://github.com/pixari/n8n-nodes-opentodo#readme",
+	"homepage": "https://github.com/OpenTodoApp/n8n-nodes-opentodo#readme",
 	"bugs": {
-		"url": "https://github.com/pixari/n8n-nodes-opentodo/issues"
+		"url": "https://github.com/OpenTodoApp/n8n-nodes-opentodo/issues"
 	},
 	"keywords": [
 		"n8n-community-node-package",
@@ -21,7 +21,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/pixari/n8n-nodes-opentodo.git"
+		"url": "git+https://github.com/OpenTodoApp/n8n-nodes-opentodo.git"
 	},
 	"scripts": {
 		"build": "n8n-node build",
