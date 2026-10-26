@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Lint, types, unit tests, build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Lint (n8n community node rules, strict)
+        run: npm run lint
+      - run: npm run format:check
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - name: Package contents
+        run: npm pack --dry-run
+      - name: No runtime dependencies
+        run: node -e "const p=require('./package.json'); if (Object.keys(p.dependencies||{}).length) { console.error('runtime dependencies are not allowed'); process.exit(1) }"
+
+  e2e:
+    name: End-to-end (OpenTodo ${{ matrix.opentodo }} and n8n containers)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        opentodo: ['0.13.0']
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Pull images
+        run: |
+          docker pull ghcr.io/pixari/opentodo:${{ matrix.opentodo }}
+          docker pull docker.n8n.io/n8nio/n8n:2.44.7
+      - run: npm run test:e2e
+        env:
+          E2E_OT_IMAGE: ghcr.io/pixari/opentodo:${{ matrix.opentodo }}
+          E2E_PREFIX: ci-e2e

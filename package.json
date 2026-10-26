@@ -1,0 +1,68 @@
+{
+	"name": "n8n-nodes-opentodo",
+	"version": "0.1.0",
+	"description": "n8n nodes for OpenTodo, the self-hosted task manager: tasks, projects, labels, comments and a signed webhook trigger.",
+	"license": "MIT",
+	"homepage": "https://github.com/pixari/n8n-nodes-opentodo#readme",
+	"bugs": {
+		"url": "https://github.com/pixari/n8n-nodes-opentodo/issues"
+	},
+	"keywords": [
+		"n8n-community-node-package",
+		"n8n",
+		"opentodo",
+		"todo",
+		"tasks",
+		"self-hosted"
+	],
+	"author": {
+		"name": "pixari",
+		"email": "raffaele.pizzari@gmail.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/pixari/n8n-nodes-opentodo.git"
+	},
+	"scripts": {
+		"build": "n8n-node build",
+		"build:watch": "tsc --watch",
+		"dev": "n8n-node dev",
+		"lint": "n8n-node lint",
+		"lint:fix": "n8n-node lint --fix",
+		"format:check": "prettier --check \"{credentials,nodes}/**/*.ts\" \"{test,tests_e2e}/**/*.mts\" \"*.mts\"",
+		"typecheck": "tsc --noEmit -p tsconfig.test.json",
+		"test": "vitest run",
+		"test:e2e": "vitest run --config tests_e2e/vitest.config.mts",
+		"release": "n8n-node release",
+		"prepublishOnly": "n8n-node prerelease",
+		"format": "prettier --write \"{credentials,nodes}/**/*.ts\" \"{test,tests_e2e}/**/*.mts\" \"*.mts\""
+	},
+	"files": [
+		"dist",
+		"!dist/tsconfig.tsbuildinfo",
+		"!dist/**/*.map"
+	],
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"strict": true,
+		"credentials": [
+			"dist/credentials/OpenTodoApi.credentials.js"
+		],
+		"nodes": [
+			"dist/nodes/OpenTodo/OpenTodo.node.js",
+			"dist/nodes/OpenTodoTrigger/OpenTodoTrigger.node.js"
+		]
+	},
+	"devDependencies": {
+		"@n8n/node-cli": "0.53.4",
+		"@types/node": "22.20.5",
+		"eslint": "9.32.0",
+		"prettier": "3.6.2",
+		"release-it": "^21.1.0",
+		"typescript": "5.9.2",
+		"vitest": "3.2.4"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	}
+}
