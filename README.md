@@ -1,11 +1,11 @@
 # n8n-nodes-opentodo
 
-[n8n](https://n8n.io) community nodes for [OpenTodo](https://github.com/pixari/OpenTodo), the open-source, self-hosted task manager.
+[n8n](https://n8n.io) community nodes for [OpenTodo](https://github.com/OpenTodoApp/OpenTodo), the open-source, self-hosted task manager.
 
 - **OpenTodo**: create, read, update, complete and delete tasks; manage projects, labels and comments. It can also be used as a tool by n8n's AI Agent.
 - **OpenTodo Trigger**: start a workflow when tasks or projects change, through a signed OpenTodo webhook that the node creates and removes for you.
 
-The nodes talk only to your own OpenTodo server, through its [HTTP API](https://github.com/pixari/OpenTodo/blob/main/docs/api.md), with one API token. They need no change on the server. Tested with n8n 2.44 and OpenTodo 0.13.
+The nodes talk only to your own OpenTodo server, through its [HTTP API](https://github.com/OpenTodoApp/OpenTodo/blob/main/docs/api.md), with one API token. They need no change on the server. Tested with n8n 2.44 and OpenTodo 0.13.
 
 [Installation](#installation) · [Credentials](#credentials) · [Operations](#operations) · [Trigger](#trigger) · [Examples](#example-workflows) · [AI agents](#ai-agents) · [Limits](#limits) · [Development](#development)
 
@@ -43,7 +43,7 @@ n8n checks the pair with `GET /api/v1/me` when you save.
 | Label | Create, Get Many |
 | Comment | Add, Get Many |
 
-Field names and values follow the [OpenTodo API](https://github.com/pixari/OpenTodo/blob/main/docs/api.md#task-fields). The output of every operation is the entity as the API returns it (Create and Update answer with the fields they wrote; Get returns the whole entity).
+Field names and values follow the [OpenTodo API](https://github.com/OpenTodoApp/OpenTodo/blob/main/docs/api.md#task-fields). The output of every operation is the entity as the API returns it (Create and Update answer with the fields they wrote; Get returns the whole entity).
 
 **Task → Create** takes a title and optionally the description (Markdown), project, section, labels, priority (1 is the highest, 4 the default), due date, due time (`HH:MM`) and due time zone, deadline, estimate in minutes, repeat rule (`every weekday`), parent task, assignee and an idempotency key.
 
@@ -67,7 +67,7 @@ The **OpenTodo Trigger** starts the workflow on the events you pick:
 | Project Created, Updated, Archived, Deleted | a project changes |
 | Import Completed, Import Undone | one summary per import job |
 
-Optionally limit it to one project. The output is OpenTodo's [webhook payload](https://github.com/pixari/OpenTodo/blob/main/docs/webhooks.md#payload-version-1): `event`, `data.task` or `data.project` with every field, `changes` with each changed field's `from` and `to`, and `source` (`device`, `server`, `caldav`, `rule`, `import`), which lets a workflow skip changes it made itself (`server`). OpenTodo has no comment events.
+Optionally limit it to one project. The output is OpenTodo's [webhook payload](https://github.com/OpenTodoApp/OpenTodo/blob/main/docs/webhooks.md#payload-version-1): `event`, `data.task` or `data.project` with every field, `changes` with each changed field's `from` and `to`, and `source` (`device`, `server`, `caldav`, `rule`, `import`), which lets a workflow skip changes it made itself (`server`). OpenTodo has no comment events.
 
 How it works:
 
@@ -80,7 +80,7 @@ Requirements:
 
 - A **Full access** token.
 - The OpenTodo server must reach n8n's webhook URL. Set n8n's `WEBHOOK_URL` (`N8N_WEBHOOK_URL` on recent versions) to an address OpenTodo can open.
-- OpenTodo refuses webhooks to private network addresses (`192.168.x.x`, `10.x`, Docker networks, `localhost`, Tailscale) until the **owner** turns on **Settings → Integrations → Webhooks → Allow private network targets**. Without it, activation fails with `private_target`. See [Private network protection](https://github.com/pixari/OpenTodo/blob/main/docs/webhooks.md#private-network-protection).
+- OpenTodo refuses webhooks to private network addresses (`192.168.x.x`, `10.x`, Docker networks, `localhost`, Tailscale) until the **owner** turns on **Settings → Integrations → Webhooks → Allow private network targets**. Without it, activation fails with `private_target`. See [Private network protection](https://github.com/OpenTodoApp/OpenTodo/blob/main/docs/webhooks.md#private-network-protection).
 - An account has at most 20 webhooks.
 
 ## Example workflows
@@ -135,4 +135,4 @@ The end-to-end suites start `ghcr.io/pixari/opentodo:0.13.0` (override with `E2E
 
 MIT. The icon is OpenTodo's brand mark, used with permission of its author.
 
-Problems and ideas go to the [issue tracker](https://github.com/pixari/n8n-nodes-opentodo/issues). OpenTodo's own documentation for this integration is [docs/n8n.md](https://github.com/pixari/OpenTodo/blob/main/docs/n8n.md).
+Problems and ideas go to the [issue tracker](https://github.com/OpenTodoApp/n8n-nodes-opentodo/issues). OpenTodo's own documentation for this integration is [docs/n8n.md](https://github.com/OpenTodoApp/OpenTodo/blob/main/docs/n8n.md).
