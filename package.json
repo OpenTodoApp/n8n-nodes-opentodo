@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-opentodo",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "n8n nodes for OpenTodo, the self-hosted task manager: tasks, projects, labels, comments and a signed webhook trigger.",
 	"license": "MIT",
 	"homepage": "https://github.com/OpenTodoApp/n8n-nodes-opentodo#readme",

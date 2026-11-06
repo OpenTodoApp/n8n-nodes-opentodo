@@ -4,6 +4,12 @@ All notable changes to this package are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-11-06
+
+### Changed
+
+- The node, trigger and credential icons use the new OpenTodo mark.
+
 ## [0.1.0] - 2026-10-26
 
 First release.
