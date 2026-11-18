@@ -129,7 +129,7 @@ The end-to-end suites start `ghcr.io/pixari/opentodo:0.13.0` (override with `E2E
 
 1. Update `version` in `package.json` and the CHANGELOG, and merge to `main`.
 2. Push a tag with the same version: `git tag 0.1.0 && git push origin 0.1.0` (or run `npm run release`, which bumps, tags and pushes interactively).
-3. The **Publish** workflow lints, tests, builds and runs `npm publish --provenance` with the `NPM_TOKEN` repository secret.
+3. The **Publish** workflow lints, tests, builds and runs `npm publish --provenance` through npm Trusted Publishing (no stored token) in the `npm` environment, which waits for the maintainer's approval.
 
 ## Licence
 

@@ -2,10 +2,13 @@
 # version tag is pushed. n8n requires verified community nodes to be published
 # from GitHub Actions with npm provenance (since 1 May 2026).
 #
-# One-time setup: an npm automation token with publish rights for this package,
-# stored as the repository secret NPM_TOKEN (Settings → Secrets and variables →
-# Actions). npm Trusted Publishing (OIDC) works too: configure this repository
-# and workflow as a trusted publisher on npmjs.com and leave NPM_TOKEN unset.
+# One-time setup: npm Trusted Publishing (OIDC), no stored token. On npmjs.com
+# (package → Settings → Trusted Publisher → GitHub Actions) name this
+# organisation, repository, the workflow `publish.yml` and the environment `npm`;
+# here, protect the `npm` environment (Settings → Environments) with a required
+# reviewer and two tag rules, `[0-9]*` and `v*` (both tag forms below). While the
+# repository secret NPM_TOKEN still exists it is passed as a fallback; delete it
+# once a release has published through trusted publishing.
 #
 # Release: set "version" in package.json and a CHANGELOG entry, merge to main,
 # then push a tag with the same version, with or without a leading "v":
@@ -30,6 +33,8 @@ jobs:
   publish:
     name: Publish to npm
     runs-on: ubuntu-latest
+    # The trusted publisher on npmjs.com names this environment, and its reviewer approves each publish.
+    environment: npm
     permissions:
       contents: read
       # Required to mint the OIDC token that signs the provenance statement.
@@ -41,6 +46,8 @@ jobs:
           node-version: 24
           registry-url: https://registry.npmjs.org
           cache: npm
+      # Trusted publishing needs npm 11.5.1 or later; Node 24 may ship an older npm.
+      - run: npm install -g npm@11.6.2
       - run: npm ci
       - name: Tag matches package.json
         run: |
